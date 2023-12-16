@@ -22,3 +22,43 @@ function fibsRec (n) {
 
 console.log(fibs(20))
 console.log(fibsRec(20))
+
+function merge (arr1, arr2) {
+  const arr3 = []
+  let i = 0
+  let j = 0
+  let k = 0
+
+  while (i <= arr1.length - 1 && j <= arr2.length - 1) {
+    if (arr1[i] < arr2[j]) {
+      arr3[k] = arr1[i]
+      i++
+      k++
+    } else {
+      arr3[k] = arr2[j]
+      j++
+      k++
+    }
+  }
+  for (; i < arr1.length; i++) {
+    arr3[k] = arr1[i]
+    k++
+  }
+  for (; j < arr2.length; j++) {
+    arr3[k] = arr2[j]
+    k++
+  }
+  return arr3
+}
+
+function mergeSort (arr) {
+  if (arr.length > 1) {
+    const mid = Math.floor(arr.length / 2)
+    const left = arr.splice(0, mid)
+
+    return merge(mergeSort(left), mergeSort(arr))
+  } else {
+    return arr
+  }
+}
+console.log(mergeSort([22, 14, 8, 34, 12, 1, 45]))
